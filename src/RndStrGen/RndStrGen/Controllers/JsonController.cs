@@ -8,7 +8,7 @@ using RndStrGen.Interfaces;
 
 namespace RndStrGen.Controllers {
 
-    [Route("api/json")]
+    [Route("api")]
     [Produces("application/json")]
     [ApiController]
     public class JsonController : ControllerBase {
@@ -19,7 +19,8 @@ namespace RndStrGen.Controllers {
             Generator = generator;
         }
 
-        [HttpGet("guid")]
+        [HttpGet("guid/json")]
+        [ProducesResponseType(typeof(string), 200)]
         public IActionResult GetGuid([FromQuery] int len = 1, [FromQuery] int count = 1) {
             List<string> returnList = new List<string>();
             for (int i = 0; i < count; i++) {
@@ -29,7 +30,8 @@ namespace RndStrGen.Controllers {
             return Ok(returnList);
         }
 
-        [HttpGet("string")]
+        [HttpGet("string/json")]
+        [ProducesResponseType(typeof(string), 200)]
         public IActionResult GetString([FromQuery] int length = 12, [FromQuery] int count = 1,
             [FromQuery] bool lowercase = true, [FromQuery] bool uppercase = true,
             [FromQuery] bool numbers = true, [FromQuery] bool symbols = true) {
