@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using RndStrGen.Interfaces;
 using RndStrGen.Services;
 
@@ -25,6 +26,10 @@ namespace RndStrGen {
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllers();
             services.AddScoped<IGeneratorService, GeneratorService>();
+
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Random String Generator API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +39,13 @@ namespace RndStrGen {
             } else {
                 app.UseHttpsRedirection();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Random String Generator v1");
+                c.RoutePrefix = string.Empty;
+            });
+
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
