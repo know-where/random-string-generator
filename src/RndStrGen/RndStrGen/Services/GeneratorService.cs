@@ -15,7 +15,7 @@ namespace RndStrGen.Services {
             for (int i = 0; i < length; i++) {
                 sb.Append(Guid.NewGuid());
                 if (i < length - 1) {
-                    sb.Append(" ");
+                    sb.Append("-");
                 }
             }
 
@@ -26,7 +26,7 @@ namespace RndStrGen.Services {
 
             const string uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const string lowercase = "abcdefghijklmnopqrstuvwxyz";
-            const string symbols = "!\"£$%^&*(? _,.";
+            const string symbols = "'!£$%^&*(? _,.";
             const string numbers = "0123456789";
 
             string chars = string.Empty;
