@@ -1,13 +1,13 @@
 ﻿using RndStrGen.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RndStrGen.Services {
+
     public class GeneratorService : IGeneratorService {
+
         public string GetGuid(int length) {
             StringBuilder sb = new StringBuilder();
             sb.Append(string.Empty);
@@ -23,7 +23,6 @@ namespace RndStrGen.Services {
         }
 
         public string GetString(int length, bool useNumbers, bool useLowercase, bool useUppercase, bool useSymbols) {
-
             const string uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const string lowercase = "abcdefghijklmnopqrstuvwxyz";
             const string symbols = "'!£$%^&*(? _,.";
