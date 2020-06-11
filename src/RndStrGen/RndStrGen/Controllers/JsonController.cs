@@ -14,9 +14,11 @@ namespace RndStrGen.Controllers {
     public class JsonController : ControllerBase {
 
         private readonly IGeneratorService Generator;
+        private readonly IIPService IP;
 
-        public JsonController(IGeneratorService generator) {
+        public JsonController(IGeneratorService generator, IIPService ip) {
             Generator = generator;
+            IP = ip;
         }
 
         [HttpGet("guid/json")]
@@ -57,5 +59,20 @@ namespace RndStrGen.Controllers {
             return Ok(returnList);
         }
 
+        [HttpGet("ip/json")]
+        [ProducesResponseType(typeof(string), 200)]
+        public IActionResult GetIP() {
+            string ip = string.Empty;
+
+            ip = IP.GetIP(HttpContext);
+
+            if (!string.IsNullOrEmpty(ip)) {
+                return Ok(ip);
+            } else {
+                return new ObjectResult("Cannot return your IP address") {
+                    StatusCode = StatusCodes.Status500InternalServerError
+                };
+            }
+        }
     }
 }
