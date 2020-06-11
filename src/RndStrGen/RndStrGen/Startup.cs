@@ -26,6 +26,7 @@ namespace RndStrGen {
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllers();
             services.AddScoped<IGeneratorService, GeneratorService>();
+            services.AddScoped<IIPService, IPService>();
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Random String Generator API", Version = "v1" });
