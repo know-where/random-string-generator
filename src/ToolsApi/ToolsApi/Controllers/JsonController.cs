@@ -8,7 +8,7 @@ using RndStrGen.Interfaces;
 
 namespace RndStrGen.Controllers {
 
-    [Route("api")]
+    [Route("")]
     [Produces("application/json")]
     [ApiController]
     public class JsonController : ControllerBase {
@@ -21,7 +21,7 @@ namespace RndStrGen.Controllers {
             IP = ip;
         }
 
-        [HttpGet("guid/json")]
+        [HttpGet("random/guid")]
         [ProducesResponseType(typeof(string), 200)]
         public IActionResult GetGuid([FromQuery] int len = 1, [FromQuery] int count = 1) {
             List<string> returnList = new List<string>();
@@ -32,7 +32,7 @@ namespace RndStrGen.Controllers {
             return Ok(returnList);
         }
 
-        [HttpGet("string/json")]
+        [HttpGet("random/string")]
         [ProducesResponseType(typeof(string), 200)]
         public IActionResult GetString([FromQuery] int length = 12, [FromQuery] int count = 1,
             [FromQuery] bool lowercase = true, [FromQuery] bool uppercase = true,
@@ -59,7 +59,7 @@ namespace RndStrGen.Controllers {
             return Ok(returnList);
         }
 
-        [HttpGet("ip/json")]
+        [HttpGet("ip")]
         [ProducesResponseType(typeof(string), 200)]
         public IActionResult GetIP() {
             string ip = string.Empty;
