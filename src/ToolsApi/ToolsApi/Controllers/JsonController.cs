@@ -8,7 +8,7 @@ using RndStrGen.Interfaces;
 
 namespace RndStrGen.Controllers {
 
-    [Route("api")]
+    [Route("")]
     [Produces("application/json")]
     [ApiController]
     public class JsonController : ControllerBase {
