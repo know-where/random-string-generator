@@ -34,9 +34,9 @@ namespace RndStrGen.Controllers {
 
         [HttpGet("random/string")]
         [ProducesResponseType(typeof(string), 200)]
-        public IActionResult GetString([FromQuery] int length = 12, [FromQuery] int count = 1,
+        public IActionResult GetString([FromQuery] int length = 16, [FromQuery] int count = 5,
             [FromQuery] bool lowercase = true, [FromQuery] bool uppercase = true,
-            [FromQuery] bool numbers = true, [FromQuery] bool symbols = true) {
+            [FromQuery] bool numbers = true, [FromQuery] bool symbols = false) {
 
             List<string> returnList = new List<string>();
 
