@@ -4,10 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using RndStrGen.Interfaces;
-using RndStrGen.Services;
+using ToolsApi.Interfaces;
+using ToolsApi.Services;
 
-namespace RndStrGen {
+namespace ToolsApi {
     public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
