@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RndStrGen.Interfaces;
+using ToolsApi.Interfaces;
+using System.Collections.Generic;
 
-namespace RndStrGen.Controllers {
+namespace ToolsApi.Controllers {
 
     [Route("")]
     [Produces("application/json")]

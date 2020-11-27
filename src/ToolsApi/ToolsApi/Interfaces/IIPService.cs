@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RndStrGen.Interfaces {
+namespace ToolsApi.Interfaces {
     public interface IIPService {
         public string GetIP(HttpContext context);
     }

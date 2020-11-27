@@ -1,10 +1,10 @@
-﻿using RndStrGen.Interfaces;
+﻿using ToolsApi.Interfaces;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace RndStrGen.Services {
+namespace ToolsApi.Services {
 
     public class GeneratorService : IGeneratorService {
 
