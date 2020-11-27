@@ -3,6 +3,8 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace ToolsApi.Services {
 
@@ -44,6 +46,26 @@ namespace ToolsApi.Services {
             }
 
             return new string(Enumerable.Repeat(chars, length).Select(x => x[RandomNumberGenerator.GetInt32(x.Length)]).ToArray());
+        }
+
+        public string GetSentence(int length, string separator, bool randomCasing) {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(string.Empty);
+            
+            List<string> words = JsonConvert.DeserializeObject<List<string>>(System.IO.File.ReadAllText("Assets/words_dictionary.json"));
+            
+            for (int i = 0; i < length; i++) {
+                bool uppercase = false;
+                if (randomCasing) {
+                    uppercase = RandomNumberGenerator.GetInt32(int.MaxValue) > (int.MaxValue / 2);
+                }
+                sb.Append(uppercase ? words[RandomNumberGenerator.GetInt32(words.Count)].ToUpper() : words[RandomNumberGenerator.GetInt32(words.Count)]);
+                if (i < length - 1) {
+                    sb.Append(separator);
+                }
+            }
+
+            return sb.ToString();
         }
     }
 }
