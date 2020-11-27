@@ -11,12 +11,12 @@ namespace RndStrGen.Controllers {
     [Route("")]
     [Produces("application/json")]
     [ApiController]
-    public class JsonController : ControllerBase {
+    public class ToolsController : ControllerBase {
 
         private readonly IGeneratorService Generator;
         private readonly IIPService IP;
 
-        public JsonController(IGeneratorService generator, IIPService ip) {
+        public ToolsController(IGeneratorService generator, IIPService ip) {
             Generator = generator;
             IP = ip;
         }
@@ -24,6 +24,14 @@ namespace RndStrGen.Controllers {
         [HttpGet("random/guid")]
         [ProducesResponseType(typeof(string), 200)]
         public IActionResult GetGuid([FromQuery] int len = 1, [FromQuery] int count = 1) {
+            if (len < 1 || len > 256) {
+                return BadRequest(new { error = "Incorrect length specified (1 < len <= 256)" });
+            }
+
+            if (count < 1 || count > 256) {
+                return BadRequest(new { error = "Incorrect count specified (1 < count <= 256)" });
+            }
+
             List<string> returnList = new List<string>();
             for (int i = 0; i < count; i++) {
                 returnList.Add(Generator.GetGuid(len));
@@ -34,26 +42,26 @@ namespace RndStrGen.Controllers {
 
         [HttpGet("random/string")]
         [ProducesResponseType(typeof(string), 200)]
-        public IActionResult GetString([FromQuery] int length = 16, [FromQuery] int count = 5,
-            [FromQuery] bool lowercase = true, [FromQuery] bool uppercase = true,
-            [FromQuery] bool numbers = true, [FromQuery] bool symbols = false) {
+        public IActionResult GetString([FromQuery] int len = 16, [FromQuery] int count = 5,
+            [FromQuery] bool lower = true, [FromQuery] bool upper = true,
+            [FromQuery] bool num = true, [FromQuery] bool sym = false) {
 
             List<string> returnList = new List<string>();
 
-            if (length < 1 || length > 256) {
-                return BadRequest(new { error = "Incorrect length specified (1 < length <= 256)" });
+            if (len < 1 || len > 256) {
+                return BadRequest(new { error = "Incorrect length specified (1 < len <= 256)" });
             }
 
             if (count < 1 || count > 256) {
                 return BadRequest(new { error = "Incorrect count specified (1 < count <= 256)" });
             }
 
-            if (!lowercase && !uppercase && !numbers && !symbols) {
+            if (!lower && !upper && !upper && !sym) {
                 return BadRequest(new { error = "Must have at least one type selected" });
             }
 
             for (int i = 0; i < count; i++) {
-                returnList.Add(Generator.GetString(length, numbers, lowercase, uppercase, symbols));
+                returnList.Add(Generator.GetString(len, num, lower, upper, sym));
             }
 
             return Ok(returnList);
