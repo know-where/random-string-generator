@@ -1,10 +1,10 @@
-﻿using ToolsApi.Interfaces;
+﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+using ToolsApi.Interfaces;
 
 namespace ToolsApi.Services {
 
@@ -17,7 +17,7 @@ namespace ToolsApi.Services {
             for (int i = 0; i < length; i++) {
                 sb.Append(Guid.NewGuid());
                 if (i < length - 1) {
-                    sb.Append("-");
+                    sb.Append('-');
                 }
             }
 
@@ -51,9 +51,9 @@ namespace ToolsApi.Services {
         public string GetSentence(int length, string separator, bool randomCasing) {
             StringBuilder sb = new StringBuilder();
             sb.Append(string.Empty);
-            
+
             List<string> words = JsonConvert.DeserializeObject<List<string>>(System.IO.File.ReadAllText("Assets/words_dictionary.json"));
-            
+
             for (int i = 0; i < length; i++) {
                 bool uppercase = false;
                 if (randomCasing) {
