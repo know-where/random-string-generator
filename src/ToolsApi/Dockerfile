@@ -8,7 +8,7 @@ WORKDIR /src
 COPY ["ToolsApi/ToolsApi.csproj", "ToolsApi/"]
 RUN dotnet restore "ToolsApi/ToolsApi.csproj"
 COPY . .
-WORKDIR "/src/ToolsApi"
+WORKDIR "/src/ToolsApi/"
 RUN dotnet build "ToolsApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
